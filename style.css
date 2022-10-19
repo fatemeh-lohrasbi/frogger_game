@@ -13,7 +13,7 @@
     background-color: red;
 }
 .starting_block {
-    background-color: green;
+    background-color: blue;
 }
 .log_left,
 .log_right{
@@ -22,4 +22,7 @@
 .car_left,
 .car_right{
     background-color: lightgray;
+}
+.frog{
+    background-color: green;
 }
