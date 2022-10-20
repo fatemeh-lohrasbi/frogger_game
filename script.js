@@ -6,7 +6,8 @@ let current_index = 76; //our starting block is on 76 index
 const width = 9;
 const log_left = document.querySelectorAll('.log_left')
 const log_right = document.querySelectorAll('.log_right')
-
+const car_left = document.querySelectorAll('.car_left')
+const car_right = document.querySelectorAll('.car_right')
 
 function move_frog(e) {
     squares[current_index].classList.remove('frog')
@@ -29,9 +30,11 @@ function move_frog(e) {
 }
 document.addEventListener('keydown', move_frog)
 
-function auto_move_logs() {
+function auto_move_elements() {
     log_left.forEach(element => move_log_left(element));
     log_right.forEach(element => move_log_right(element));
+    car_left.forEach(element => move_car_left(element));
+    car_right.forEach(element => move_car_right(element));
 }
 
 function move_log_left(log_left) {
@@ -84,4 +87,40 @@ function move_log_right(log_right) {
     }
 }
 
-setInterval(auto_move_logs, 1000)
+
+function move_car_left(car_left) {
+    switch (true) {
+        case car_left.classList.contains('c1'):
+            car_left.classList.remove('c1')
+            car_left.classList.add('c2')
+            break
+        case car_left.classList.contains('c2'):
+            car_left.classList.remove('c2')
+            car_left.classList.add('c3')
+            break
+        case car_left.classList.contains('c3'):
+            car_left.classList.remove('c3')
+            car_left.classList.add('c1')
+            break
+    }
+}
+
+function move_car_right(car_right) {
+    switch (true) {
+        case car_right.classList.contains('c1'):
+            car_right.classList.remove('c1')
+            car_right.classList.add('c3')
+            break
+        case car_right.classList.contains('c2'):
+            car_right.classList.remove('c2')
+            car_right.classList.add('c1')
+            break
+        case car_right.classList.contains('c3'):
+            car_right.classList.remove('c3')
+            car_right.classList.add('c2')
+            break
+    }
+}
+
+
+setInterval(auto_move_elements, 1000)
