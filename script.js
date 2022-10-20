@@ -5,6 +5,8 @@ const squares = document.querySelectorAll('.grid div')
 let current_index = 76; //our starting block is on 76 index
 const width = 9;
 const log_left = document.querySelectorAll('.log_left')
+const log_right = document.querySelectorAll('.log_right')
+
 
 function move_frog(e) {
     squares[current_index].classList.remove('frog')
@@ -29,6 +31,7 @@ document.addEventListener('keydown', move_frog)
 
 function auto_move_logs() {
     log_left.forEach(element => move_log_left(element));
+    log_right.forEach(element => move_log_right(element));
 }
 
 function move_log_left(log_left) {
@@ -52,6 +55,31 @@ function move_log_left(log_left) {
         case log_left.classList.contains('l5'):
             log_left.classList.remove('l5')
             log_left.classList.add('l1')
+            break
+    }
+}
+
+function move_log_right(log_right) {
+    switch (true) {
+        case log_right.classList.contains('l1'):
+            log_right.classList.remove('l1')
+            log_right.classList.add('l5')
+            break
+        case log_right.classList.contains('l2'):
+            log_right.classList.remove('l2')
+            log_right.classList.add('l1')
+            break
+        case log_right.classList.contains('l3'):
+            log_right.classList.remove('l3')
+            log_right.classList.add('l2')
+            break
+        case log_right.classList.contains('l4'):
+            log_right.classList.remove('l4')
+            log_right.classList.add('l3')
+            break
+        case log_right.classList.contains('l5'):
+            log_right.classList.remove('l5')
+            log_right.classList.add('l4')
             break
     }
 }
