@@ -1,28 +1,40 @@
-.grid{
+.grid {
     border: 1px solid black;
     width: 180px;
     height: 180px;
     display: flex;
     flex-wrap: wrap;
 }
-.grid div{
+
+.grid div {
     width: 20px;
     height: 20px;
 }
-.ending_block{
+
+.ending_block {
     background-color: red;
 }
+
 .starting_block {
     background-color: blue;
 }
-.log_left,
-.log_right{
-    background-color: lightblue;
-}
+
 .car_left,
-.car_right{
+.car_right {
     background-color: lightgray;
 }
-.frog{
+
+.frog {
     background-color: green;
+}
+
+.l1,
+.l2,
+.l3 {
+    background-color: brown;
+}
+
+.l4,
+.l5{
+    background-color: lightblue;
 }
