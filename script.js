@@ -8,6 +8,7 @@ const log_left = document.querySelectorAll('.log_left')
 const log_right = document.querySelectorAll('.log_right')
 const car_left = document.querySelectorAll('.car_left')
 const car_right = document.querySelectorAll('.car_right')
+let timer_id;
 
 function move_frog(e) {
     squares[current_index].classList.remove('frog')
@@ -35,6 +36,8 @@ function auto_move_elements() {
     log_right.forEach(element => move_log_right(element));
     car_left.forEach(element => move_car_left(element));
     car_right.forEach(element => move_car_right(element));
+    lose()
+    win()
 }
 
 function move_log_left(log_left) {
@@ -121,6 +124,27 @@ function move_car_right(car_right) {
             break
     }
 }
+function lose() {
+    if (
+        squares[current_index].classList.contains('c1') ||
+        squares[current_index].classList.contains('l4') ||
+        squares[current_index].classList.contains('l5')
+    ) {
+        result_display.textContent = 'You Lose 😥';
+        clearInterval(timer_id)
+        squares[current_index].classList.remove('frog')
+        document.removeEventListener('keydown', move_frog)
+    }
+}
+
+function win(){
+    if (
+        squares[current_index].classList.contains('ending_block')) {
+        result_display.textContent = 'You Win 😍';
+        clearInterval(timer_id)
+        document.removeEventListener('keydown', move_frog)
+    }
+}
 
 
-setInterval(auto_move_elements, 1000)
+timer_id = setInterval(auto_move_elements, 1000)
