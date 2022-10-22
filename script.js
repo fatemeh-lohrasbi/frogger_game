@@ -1,37 +1,37 @@
-const time_left_display = document.querySelector('#time_left')
-const result_display = document.querySelector('#result')
-const squares = document.querySelectorAll('.grid div')
+const time_left_display = document.querySelector('#time_left');
+const result_display = document.querySelector('#result');
+const squares = document.querySelectorAll('.grid div');
 let current_index = 76; //our starting block is on 76 index
 const width = 9;
-const log_left = document.querySelectorAll('.log_left')
-const log_right = document.querySelectorAll('.log_right')
-const car_left = document.querySelectorAll('.car_left')
-const car_right = document.querySelectorAll('.car_right')
-const play_again_btn = document.querySelector('#play_again_btn')
+const log_left = document.querySelectorAll('.log_left');
+const log_right = document.querySelectorAll('.log_right');
+const car_left = document.querySelectorAll('.car_left');
+const car_right = document.querySelectorAll('.car_right');
+const play_again_btn = document.querySelector('#play_again_btn');
 play_again_btn.style.display= 'none'
 let timer_id;
 let current_time = 10;
 
 function move_frog(e) {
-    squares[current_index].classList.remove('frog')
+    squares[current_index].classList.remove('frog');
 
     switch (e.key) {
         case 'ArrowLeft':
-            if (current_index % width !== 0) current_index -= 1  // if frog is not on 0,9,18,27,36,45, ...             
+            if (current_index % width !== 0) current_index -= 1 ; // if frog is not on 0,9,18,27,36,45, ...             
             break
         case 'ArrowRight':
-            if (current_index % width < width - 1) current_index += 1
+            if (current_index % width < width - 1) current_index += 1;
             break
         case 'ArrowUp':
-            if (current_index - width >= 0) current_index -= width
+            if (current_index - width >= 0) current_index -= width;
             break
         case 'ArrowDown':
-            if (current_index + width < width * width) current_index += width
+            if (current_index + width < width * width) current_index += width;
             break
     }
-    squares[current_index].classList.add('frog')
+    squares[current_index].classList.add('frog');
 }
-document.addEventListener('keydown', move_frog)
+document.addEventListener('keydown', move_frog);
 
 function auto_move_elements() {
     current_time--;
@@ -40,8 +40,8 @@ function auto_move_elements() {
     log_right.forEach(element => move_log_right(element));
     car_left.forEach(element => move_car_left(element));
     car_right.forEach(element => move_car_right(element));
-    lose()
-    win()
+    lose();
+    win();
 }
 
 function move_log_left(log_left) {
@@ -136,10 +136,10 @@ function lose() {
         current_time == 0
     ) {
         result_display.textContent = 'You Lose 😥';
-        clearInterval(timer_id)
-        squares[current_index].classList.remove('frog')
-        document.removeEventListener('keydown', move_frog)
-        play_again_btn.style.display = 'block'
+        clearInterval(timer_id);
+        squares[current_index].classList.remove('frog');
+        document.removeEventListener('keydown', move_frog);
+        play_again_btn.style.display = 'block';
 
     }
 }
@@ -148,8 +148,9 @@ function win(){
     if (
         squares[current_index].classList.contains('ending_block')) {
         result_display.textContent = 'You Win 😍';
-        clearInterval(timer_id)
-        document.removeEventListener('keydown', move_frog)
+        clearInterval(timer_id);
+        document.removeEventListener('keydown', move_frog);
+        play_again_btn.style.display = 'block';
     }
 }
 
@@ -157,4 +158,4 @@ play_again_btn.addEventListener('click', () => {
     location.reload();
 })
 
-timer_id = setInterval(auto_move_elements, 1000)
+timer_id = setInterval(auto_move_elements, 1000);
