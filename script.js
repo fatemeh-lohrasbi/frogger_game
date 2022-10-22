@@ -1,6 +1,5 @@
 const time_left_display = document.querySelector('#time_left')
 const result_display = document.querySelector('#result')
-const start_pause_btn = document.querySelector('#start_pause_btn')
 const squares = document.querySelectorAll('.grid div')
 let current_index = 76; //our starting block is on 76 index
 const width = 9;
@@ -8,7 +7,10 @@ const log_left = document.querySelectorAll('.log_left')
 const log_right = document.querySelectorAll('.log_right')
 const car_left = document.querySelectorAll('.car_left')
 const car_right = document.querySelectorAll('.car_right')
+const play_again_btn = document.querySelector('#play_again_btn')
+play_again_btn.style.display= 'none'
 let timer_id;
+let current_time = 10;
 
 function move_frog(e) {
     squares[current_index].classList.remove('frog')
@@ -32,6 +34,8 @@ function move_frog(e) {
 document.addEventListener('keydown', move_frog)
 
 function auto_move_elements() {
+    current_time--;
+    time_left_display.textContent = current_time
     log_left.forEach(element => move_log_left(element));
     log_right.forEach(element => move_log_right(element));
     car_left.forEach(element => move_car_left(element));
@@ -128,12 +132,15 @@ function lose() {
     if (
         squares[current_index].classList.contains('c1') ||
         squares[current_index].classList.contains('l4') ||
-        squares[current_index].classList.contains('l5')
+        squares[current_index].classList.contains('l5') ||
+        current_time == 0
     ) {
         result_display.textContent = 'You Lose 😥';
         clearInterval(timer_id)
         squares[current_index].classList.remove('frog')
         document.removeEventListener('keydown', move_frog)
+        play_again_btn.style.display = 'block'
+
     }
 }
 
@@ -146,5 +153,8 @@ function win(){
     }
 }
 
+play_again_btn.addEventListener('click', () => {
+    location.reload();
+})
 
 timer_id = setInterval(auto_move_elements, 1000)
